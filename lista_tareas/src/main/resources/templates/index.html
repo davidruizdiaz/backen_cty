@@ -38,7 +38,7 @@
 
   <hr>
 
-  <div class="form-layout">
+  <div class="form-layout_">
     <div>
       <form th:action="@{/guardar}" method="POST" th:object="${tarea}">
         <label for="descripcion">Descripción:</label>
@@ -47,7 +47,7 @@
       </form>
     </div>
     <div>
-      <button id="btn-pdf">Guardar en PDF</button>
+      <!-- <button id="btn-pdf">Guardar en PDF</button> -->
     </div>
   </div>
   <hr>
@@ -69,20 +69,6 @@
       </div>
     </li>
   </ul>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
-    integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script>
-
-    document.querySelector('#btn-pdf').addEventListener('click', () => {
-      const lista = document.querySelector('.tasks-list');
-      html2pdf().from(lista).toContainer().then(function () {
-        _window.document.querySelector('.html2pdf__overlay').style.opacity = 1;
-      });
-    });
-  </script>
 
 </body>
 
