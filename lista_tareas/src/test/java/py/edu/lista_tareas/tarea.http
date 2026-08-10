@@ -1,0 +1,23 @@
+# test para listar
+GET http://localhost:8080/listar
+Content-Type: application/json
+
+# test para crear
+POST http://localhost:8080/crear
+Content-Type: application/json
+
+{
+  "descripcion": "Tarea creada desde la API REST"
+}
+
+# test para completar la tarea
+PUT http://localhost:8080/completar
+Content-Type: application/json
+
+15
+
+# test para eliminar una tarea
+DELETE http://localhost:8080/eliminar
+Content-Type: application/json
+
+14
