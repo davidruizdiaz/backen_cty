@@ -27,7 +27,7 @@ public class TareasControlador {
     List<Tarea> listaTareas = servicio.listarTareas();
 
     m.addAttribute("tarea", tarea);
-    m.addAttribute("titulo_de_la_pagina", ".:: Lista de Tareas ::.");
+    m.addAttribute("titulo_de_la_pagina", ".:: TareasAPP ::.");
     m.addAttribute("todas_las_tareas", listaTareas);
     return "index";
   }

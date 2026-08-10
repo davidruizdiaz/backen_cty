@@ -6,6 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>APP-TAREAS</title>
   <style>
+    .formulario {
+      display: flex;
+      justify-content: space-between;
+      width: 60%;
+      margin: 0 auto;
+    }
+
     ul {
       width: 60%;
       margin: 0 auto;
@@ -29,46 +36,71 @@
       width: 80%;
       margin: 10px auto;
     }
+
+    @media print {
+      .cabecera {
+        display: none;
+      }
+    }
   </style>
 </head>
 
 <body>
 
-  <h1 th:text="${titulo_de_la_pagina}"></h1>
+  <div class="cabecera">
 
-  <hr>
+    <h1 th:text="${titulo_de_la_pagina}"></h1>
 
-  <div class="form-layout_">
-    <div>
+    <hr>
+
+    <div class="formulario">
       <form th:action="@{/guardar}" method="POST" th:object="${tarea}">
         <label for="descripcion">Descripción:</label>
         <input type="text" id="descripcion" th:field="*{descripcion}" placeholder="Ingresa la descripción" required>
         <input type="submit" value="Guardar">
       </form>
-    </div>
-    <div>
-      <!-- <button id="btn-pdf">Guardar en PDF</button> -->
-    </div>
-  </div>
-  <hr>
-
-
-
-  <ul class="tasks-list">
-    <li th:each="t : ${todas_las_tareas}">
-
-      <span th:classappend="${t.completada} ? 'completar' : '' " th:text="${t.descripcion}"></span>
 
       <div>
-        <form th:if="${t.completada} == false" th:action="@{/completar/{id}(id=${t.id})}" method="post">
-          <input type="submit" value="✓" title="Completar">
-        </form>
-        <form th:if="${t.completada} == true" th:action="@{/eliminar/{id}(id=${t.id})}" method="post">
-          <input type="submit" value="✕" title="Eliminar">
-        </form>
+        <button id="btn-pdf">GENERAR PDF</button>
       </div>
-    </li>
-  </ul>
+    </div>
+
+    <hr>
+
+  </div>
+
+  <div class="detalle">
+
+    <h2 style="text-align: center;">Listado de tareas</h2>
+
+    <ul class="tasks-list">
+      <li th:each="t : ${todas_las_tareas}">
+
+        <span th:classappend="${t.completada} ? 'completar' : '' " th:text="${t.descripcion}"></span>
+
+        <div>
+          <form th:if="${t.completada} == false" th:action="@{/completar/{id}(id=${t.id})}" method="post">
+            <input type="submit" value="✓" title="Completar">
+          </form>
+          <form th:if="${t.completada} == true" th:action="@{/eliminar/{id}(id=${t.id})}" method="post">
+            <input type="submit" value="✕" title="Eliminar">
+          </form>
+        </div>
+      </li>
+    </ul>
+
+  </div>
+
+  <script>
+
+    const btn = document.getElementById('btn-pdf');
+    btn.addEventListener('click', crearPdf);
+
+    function crearPdf() {
+      window.print();
+    }
+
+  </script>
 
 </body>
 
